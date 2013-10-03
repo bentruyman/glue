@@ -1,0 +1,29 @@
+{
+  "name": "weld",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bentruyman/weld.git"
+  },
+  "author": "Ben Truyman <ben@truyman.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bentruyman/weld/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-casperjs": "~1.1.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-testem": "~0.4.0",
+    "mocha": "~1.13.0",
+    "testem": "~0.5.3"
+  }
+}

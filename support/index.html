@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Weld Tests</title>
+    <link href="mocha.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <div id="sandbox" style="position:absolute;top:-5000px;left:-5000px"></div>
+    <script src="/support/expect.js"></script>
+    <script src="/support/mocha.js"></script>
+    <script>mocha.setup("bdd");</script>
+    <script src="/weld.js"></script>
+    <script src="/test/weld.js"></script>
+    <script>
+      if (location.hash === "#testem") {
+        document.write("<script src=/testem.js><\/script>");
+      }
+    </script>
+    <script>
+      mocha.checkLeaks();
+      mocha.run();
+    </script>
+  </body>
+</html>
