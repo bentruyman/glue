@@ -8,7 +8,10 @@ module.exports = function (grunt) {
       dist: "dist"
     },
     jshint: {
-      files: javascripts
+      files: javascripts,
+      options: {
+        jshintrc: ".jshintrc"
+      }
     },
     testem: {
       src: "testem.json",
@@ -33,7 +36,6 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.loadNpmTasks("grunt-casperjs");
   grunt.loadNpmTasks("grunt-contrib-clean");
   grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks("grunt-contrib-watch");

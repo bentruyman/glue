@@ -1,9 +1,13 @@
-(function (win, undefined) {
-  var PREFIX = "data-weld",
-      R_ATTR_PREFIX = new RegExp("^" + PREFIX + "-"),
-      R_BOOL = /^(true|false)$/;
+(function (window, undefined) {
+  var
+    // aliases
+    document = window.document,
+    // constants
+    PREFIX = "data-weld",
+    R_ATTR_PREFIX = new RegExp("^" + PREFIX + "-"),
+    R_BOOL = /^(true|false)$/,
 
-  var weld = function (name, callback) {
+  weld = function (name, callback) {
     var attrs, key, node, settings,
         i = 0,
         nodes = findNodes(name);
@@ -20,9 +24,9 @@
 
       callback.call(node, settings);
     }
-  };
+  },
 
-  var findNodes = (function () {
+  findNodes = (function () {
     if (document.querySelectorAll !== undefined) {
       return function (name) {
         return toArray(document.querySelectorAll("[" + PREFIX + "=" + name + "]"));
@@ -52,9 +56,9 @@
         return nodes;
       };
     }
-  })();
+  })(),
 
-  var findAttributes = function (node) {
+  findAttributes = function (node) {
     var attr, name,
         attrs = {},
         i = 0;
@@ -68,9 +72,9 @@
     }
 
     return attrs;
-  };
+  },
 
-  var parseAttr = function (value) {
+  parseAttr = function (value) {
     // number
     if(/^\-?([0-9]+(\.[0-9]+)?|Infinity)$/.test(value)) {
       return Number(value);
@@ -87,11 +91,11 @@
 
     // string
     return value;
-  };
+  },
 
-  var toArray = function (arrayLike) {
+  toArray = function (arrayLike) {
     return Array.prototype.slice.call(arrayLike);
   };
 
-  win.weld = weld;
+  window.weld = weld;
 })(this);

@@ -3,13 +3,13 @@
   "framework": "mocha",
   "test_page": "support/index.html",
   "launch_in_dev": [
-    "Chrome",
-    "Firefox"
+    "chrome",
+    "firefox"
   ],
   "launch_in_ci": [
-    "Chrome",
-    "Firefox",
-    "Safari",
-    "Opera"
+    "chrome",
+    "firefox",
+    "opera",
+    "safari"
   ]
 }
