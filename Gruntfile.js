@@ -5,7 +5,8 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
     clean: {
-      dist: "dist"
+      dist: "dist",
+      testem: "./json"
     },
     jshint: {
       files: javascripts,
@@ -14,8 +15,7 @@ module.exports = function (grunt) {
       }
     },
     testem: {
-      src: "testem.json",
-      dest: "tests.tap"
+      json: "testem.json"
     },
     uglify: {
       options: {
@@ -43,5 +43,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-testem");
 
   grunt.registerTask("default", ["jshint"]);
-  grunt.registerTask("test", ["jshint", "testem"]);
+  grunt.registerTask("test", ["jshint", "testem", "clean:testem"]);
 };

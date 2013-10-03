@@ -13,11 +13,7 @@
     <script>mocha.setup("bdd");</script>
     <script src="/weld.js"></script>
     <script src="/test/weld.js"></script>
-    <script>
-      if (location.hash === "#testem") {
-        document.write("<script src=/testem.js><\/script>");
-      }
-    </script>
+    <script src="/testem.js"></script>
     <script>
       mocha.checkLeaks();
       mocha.run();
