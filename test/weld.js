@@ -32,13 +32,14 @@
     });
 
     it("should convert numeric options", function (done) {
-      sandbox.innerHTML = ["<div data-weld='widget'" +
-                                "data-weld-opt1='0'" +
-                                "data-weld-opt2='10'" +
-                                "data-weld-opt3='3.14159'" +
-                                "data-weld-opt4='-9000'" +
-                           "</div>"
-                          ].join(" ");
+      sandbox.innerHTML = [
+        "<div data-weld='widget'" +
+             "data-weld-opt1='0'" +
+             "data-weld-opt2='10'" +
+             "data-weld-opt3='3.14159'" +
+             "data-weld-opt4='-9000'" +
+        "</div>"
+      ].join(" ");
 
       weld("widget", function (options) {
         expect(options.opt1).to.be(0);
@@ -50,10 +51,11 @@
     });
 
     it("should convert \"JSON\" options", function (done) {
-      sandbox.innerHTML = ["<div data-weld='widget'" +
-                                "data-weld-obj1='{ \"foo\": \"bar\" }'" +
-                           "</div>"
-                          ].join(" ");
+      sandbox.innerHTML = [
+        "<div data-weld='widget'" +
+             "data-weld-obj1='{ \"foo\": \"bar\" }'" +
+        "</div>"
+      ].join(" ");
 
       weld("widget", function (options) {
         expect(options.obj1).to.eql({ foo: "bar" });
