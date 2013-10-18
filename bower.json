@@ -1,0 +1,24 @@
+{
+  "name": "glue",
+  "main": "glue.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/bentruyman/glue",
+  "authors": [
+    "Ben Truyman <ben@truyman.com>"
+  ],
+  "description": "Cleanly bonds together your content with behaviors.",
+  "keywords": [
+    "glue",
+    "DOM"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "*.md",
+    "Gruntfile.js",
+    "bower.json",
+    "node_modules",
+    "package.json",
+    "test"
+  ]
+}

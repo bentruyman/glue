@@ -1,8 +1,13 @@
 {
   "name": "glue",
+  "main": "glue.js",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "description": "Cleanly bonds together your content with behaviors.",
+  "author": "Ben Truyman <ben@truyman.com>",
+  "keywords": [
+    "glue",
+    "DOM"
+  ],
   "scripts": {
     "test": "grunt test"
   },
@@ -10,7 +15,6 @@
     "type": "git",
     "url": "git://github.com/bentruyman/glue.git"
   },
-  "author": "Ben Truyman <ben@truyman.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bentruyman/glue/issues"
