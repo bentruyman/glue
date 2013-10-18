@@ -114,6 +114,7 @@
              "data-glue-opt2='10'" +
              "data-glue-opt3='3.14159'" +
              "data-glue-opt4='-9000'" +
+             "data-glue-opt5='Infinity'" +
         "</div>"
       ].join(" ");
 
@@ -125,6 +126,7 @@
       expect(opts.opt2).to.be(10);
       expect(opts.opt3).to.be(3.14159);
       expect(opts.opt4).to.be(-9000);
+      expect(opts.opt5).to.be(Infinity);
     });
 
     it("should convert \"JSON\" options", function () {
