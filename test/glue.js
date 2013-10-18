@@ -20,7 +20,7 @@
         that = this;
       });
 
-      expect(that).to.be(container);
+      expect(that).toBe(container);
     });
 
     it("can reinstantiate new modules", function () {
@@ -37,13 +37,13 @@
         els.push(this);
       });
 
-      expect(els).to.eql([container1]);
+      expect(els).toEqual([container1]);
 
       sandbox.appendChild(container2);
 
       glue("widget");
 
-      expect(els).to.eql([container1, container2]);
+      expect(els).toEqual([container1, container2]);
     });
 
     it("doesn't invoke modules until a callback is defined", function () {
@@ -64,10 +64,10 @@
         els.push(this);
       });
 
-      expect(els).to.eql([container1, container2]);
+      expect(els).toEqual([container1, container2]);
     });
 
-    it("should allow a module's callback to be overwritten", function () {
+    it("should allow a module's callback toBe overwritten", function () {
       var results = [],
           container1 = document.createElement("div"),
           container2 = document.createElement("div");
@@ -87,7 +87,7 @@
         results.push("bar");
       });
 
-      expect(results).to.eql(["foo", "bar"]);
+      expect(results).toEqual(["foo", "bar"]);
     });
 
     it("can instantiate a module passed by reference", function () {
@@ -103,16 +103,16 @@
         els.push(this);
       });
 
-      expect(els).to.eql([]);
+      expect(els).toEqual([]);
 
       glue(container);
 
-      expect(els).to.eql([container]);
+      expect(els).toEqual([container]);
     });
   });
 
   describe("Configuration", function () {
-    it("allows the data attribute prefix to be defined", function () {
+    it("allows the data attribute prefix toBe defined", function () {
       var opts;
 
       glue({ prefix: "prefix" });
@@ -123,8 +123,8 @@
         opts = options;
       });
 
-      expect(opts.foo).to.eql("bar");
-      expect(opts.baz).to.eql("qux");
+      expect(opts.foo).toEqual("bar");
+      expect(opts.baz).toEqual("qux");
     });
   });
 
@@ -138,8 +138,8 @@
         opts = options;
       });
 
-      expect(opts.foo).to.eql("bar");
-      expect(opts.baz).to.eql("qux");
+      expect(opts.foo).toEqual("bar");
+      expect(opts.baz).toEqual("qux");
     });
 
     it("should convert numeric options", function () {
@@ -159,11 +159,11 @@
         opts = options;
       });
 
-      expect(opts.opt1).to.be(0);
-      expect(opts.opt2).to.be(10);
-      expect(opts.opt3).to.be(3.14159);
-      expect(opts.opt4).to.be(-9000);
-      expect(opts.opt5).to.be(Infinity);
+      expect(opts.opt1).toBe(0);
+      expect(opts.opt2).toBe(10);
+      expect(opts.opt3).toBe(3.14159);
+      expect(opts.opt4).toBe(-9000);
+      expect(opts.opt5).toBe(Infinity);
     });
 
     it("should convert \"JSON\" options", function () {
@@ -179,7 +179,7 @@
         opts = options;
       });
 
-      expect(opts.obj1).to.eql({ foo: "bar" });
+      expect(opts.obj1).toEqual({ foo: "bar" });
     });
   });
 })();

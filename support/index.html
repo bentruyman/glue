@@ -3,20 +3,27 @@
   <head>
     <meta charset="utf-8">
     <title>Glue - Tests</title>
-    <link href="mocha.css" rel="stylesheet">
+    <link href="jasmine.css" rel="stylesheet">
   </head>
   <body>
-    <div id="mocha"></div>
     <div id="sandbox" style="position:absolute;top:-5000px;left:-5000px"></div>
-    <script src="/support/expect.js"></script>
-    <script src="/support/mocha.js"></script>
+    <script src="/support/jasmine.js"></script>
+    <script src="/support/jasmine-html.js"></script>
     <script>mocha.setup("bdd");</script>
     <script src="/glue.js"></script>
     <script src="/test/glue.js"></script>
     <script src="/testem.js"></script>
     <script>
-      mocha.checkLeaks();
-      mocha.run();
+      (function() {
+        var jasmineEnv = jasmine.getEnv(),
+            htmlReporter = new jasmine.HtmlReporter();
+
+        jasmineEnv.updateInterval = 1000;
+
+        jasmineEnv.addReporter(htmlReporter);
+
+        jasmineEnv.execute();
+      })();
     </script>
   </body>
 </html>
