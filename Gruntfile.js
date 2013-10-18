@@ -1,6 +1,6 @@
 /* global module */
 module.exports = function (grunt) {
-  var javascripts = ["Gruntfile.js", "weld.js", "test/*.js"];
+  var javascripts = ["Gruntfile.js", "glue.js", "test/*.js"];
 
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
@@ -23,9 +23,9 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          "dist/<%= pkg.name %>.min.js": "weld.js"
+          "dist/<%= pkg.name %>.min.js": "glue.js"
         }
-      },
+      }
     },
     watch: {
       files: javascripts,
