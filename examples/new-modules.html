@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Glue - New Modules</title>
+  </head>
+  <body>
+    <div data-glue="module" data-glue-color="blue"></div>
+    <button id="button">Click to add new modules</button>
+    <script src="../glue.js"></script>
+    <script>
+      glue("module", function (options) {
+        this.innerHTML = "I'm a module!";
+        this.style.color = options.color;
+      });
+
+      document.getElementById("button").addEventListener("click", function (event) {
+        var module = document.createElement("div");
+
+        module.setAttribute("data-glue", "module");
+        module.setAttribute("data-glue-color", "burlywood");
+
+        document.body.appendChild(module);
+
+        glue("module");
+      }, false);
+    </script>
+  </body>
+</html>
