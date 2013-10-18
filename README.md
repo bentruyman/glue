@@ -42,7 +42,7 @@ Provided options will also try to be coerced into either `Object` or `Number` fo
 </script>
 ```
 
-## Instantiating New Modules
+### Instantiating New Modules
 
 New modules can be instantiated with previously specified constructors simply by invoking `glue` with the name of the module.
 
