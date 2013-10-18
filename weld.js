@@ -6,33 +6,27 @@
     PREFIX = "data-weld",
     R_ATTR_PREFIX = new RegExp("^" + PREFIX + "-"),
     R_BOOL = /^(true|false)$/,
+    // state
+    callbacks = {},
+    invokedNodes = [],
 
   weld = function (name, callback) {
-    var attrs, key, node, settings,
-        i = 0,
-        nodes = findNodes(name);
-
-    for (;node = nodes[i++];) {
-      attrs = findAttributes(node);
-      settings = {};
-
-      for (key in attrs) {
-        if (attrs.hasOwnProperty(key)) {
-          settings[key] = parseAttr(attrs[key]);
-        }
-      }
-
-      callback.call(node, settings);
+    if (callback !== undefined) {
+      callbacks[name] = callback;
     }
+
+    invokeNodes(findNodes(name), callbacks[name]);
   },
 
   findNodes = (function () {
+    var find;
+
     if (document.querySelectorAll !== undefined) {
-      return function (name) {
+      find = function (name) {
         return toArray(document.querySelectorAll("[" + PREFIX + "=" + name + "]"));
       };
     } else {
-      return function walk(name, root) {
+      find = function walk(name, root) {
         var child, i, nodes;
 
         if (root === undefined) {
@@ -56,6 +50,25 @@
         return nodes;
       };
     }
+
+    return function (name) {
+      var k, invokedNode, node,
+          i = 0,
+          nodes = find(name),
+          uninvokedNodes = [];
+
+      outer: for (;node = nodes[i++];) {
+        inner: for (k = 0;invokedNode = invokedNodes[k++];) {
+          if (invokedNode === node) {
+            continue outer;
+          }
+        }
+
+        uninvokedNodes.push(node);
+      }
+
+      return uninvokedNodes;
+    };
   })(),
 
   findAttributes = function (node) {
@@ -72,6 +85,30 @@
     }
 
     return attrs;
+  },
+
+  invokeNodes = function (nodes, callback) {
+    var node,
+        i = 0;
+
+    for (;node = nodes[i++];) {
+      invokeNode(node, callback);
+    }
+  },
+
+  invokeNode = function (node, callback) {
+    var attrs = findAttributes(node),
+        settings = {},
+        key;
+
+    for (key in attrs) {
+      if (attrs.hasOwnProperty(key)) {
+        settings[key] = parseAttr(attrs[key]);
+      }
+    }
+
+    callback.call(node, settings);
+    invokedNodes.push(node);
   },
 
   parseAttr = function (value) {

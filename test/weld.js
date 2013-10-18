@@ -7,31 +7,62 @@
   });
 
   describe("Instantiation", function () {
-    it("should instantiate a named module based on a default data attribute", function (done) {
-      var container = document.createElement("div");
+    it("should instantiate a named module based on a default data attribute", function () {
+      var that,
+          container = document.createElement("div");
+
       container.setAttribute("data-weld", "widget");
 
       sandbox.appendChild(container);
 
       weld("widget", function () {
-        expect(this).to.be(container);
-        done();
+        that = this;
       });
+
+      expect(that).to.be(container);
+    });
+
+    it("can reinstantiate new modules", function () {
+      var els = [],
+          container1 = document.createElement("div"),
+          container2 = document.createElement("div");
+
+      container1.setAttribute("data-weld", "widget");
+      container2.setAttribute("data-weld", "widget");
+
+      sandbox.appendChild(container1);
+
+      weld("widget", function () {
+        els.push(this);
+      });
+
+      expect(els).to.eql([container1]);
+
+      sandbox.appendChild(container2);
+
+      weld("widget");
+
+      expect(els).to.eql([container1, container2]);
     });
   });
 
   describe("Options", function () {
-    it("should provide pass a set of options to the constructor based on markup attributes", function (done) {
+    it("should provide pass a set of options to the constructor based on markup attributes", function () {
+      var opts;
+
       sandbox.innerHTML = "<div data-weld='widget' data-weld-foo='bar' data-weld-baz='qux'></div>";
 
       weld("widget", function (options) {
-        expect(options.foo).to.eql("bar");
-        expect(options.baz).to.eql("qux");
-        done();
+        opts = options;
       });
+
+      expect(opts.foo).to.eql("bar");
+      expect(opts.baz).to.eql("qux");
     });
 
-    it("should convert numeric options", function (done) {
+    it("should convert numeric options", function () {
+      var opts;
+
       sandbox.innerHTML = [
         "<div data-weld='widget'" +
              "data-weld-opt1='0'" +
@@ -42,15 +73,18 @@
       ].join(" ");
 
       weld("widget", function (options) {
-        expect(options.opt1).to.be(0);
-        expect(options.opt2).to.be(10);
-        expect(options.opt3).to.be(3.14159);
-        expect(options.opt4).to.be(-9000);
-        done();
+        opts = options;
       });
+
+      expect(opts.opt1).to.be(0);
+      expect(opts.opt2).to.be(10);
+      expect(opts.opt3).to.be(3.14159);
+      expect(opts.opt4).to.be(-9000);
     });
 
-    it("should convert \"JSON\" options", function (done) {
+    it("should convert \"JSON\" options", function () {
+      var opts;
+
       sandbox.innerHTML = [
         "<div data-weld='widget'" +
              "data-weld-obj1='{ \"foo\": \"bar\" }'" +
@@ -58,9 +92,10 @@
       ].join(" ");
 
       weld("widget", function (options) {
-        expect(options.obj1).to.eql({ foo: "bar" });
-        done();
+        opts = options;
       });
+
+      expect(opts.obj1).to.eql({ foo: "bar" });
     });
   });
 })();
