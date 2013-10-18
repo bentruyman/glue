@@ -1,15 +1,5 @@
 {
   "port": 4000,
   "framework": "mocha",
-  "test_page": "support/index.html",
-  "launch_in_dev": [
-    "chrome",
-    "firefox"
-  ],
-  "launch_in_ci": [
-    "chrome",
-    "firefox",
-    "opera",
-    "safari"
-  ]
+  "test_page": "support/index.html"
 }
