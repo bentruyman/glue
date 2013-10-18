@@ -63,6 +63,21 @@ New modules can be instantiated with previously specified constructors simply by
 </script>
 ```
 
+## Customization
+
+The data attribute prefix `glue` uses can be customized.
+
+```html
+<div data-prefix="hello-world"></div>
+<script>
+  glue({ prefix: "prefix" });
+
+  glue("hello-world", function () {
+    this.innerHTML = "Hello World";
+  });
+</script>
+```
+
 ## License
 
 Copyright (c) 2013 Ben Truyman
