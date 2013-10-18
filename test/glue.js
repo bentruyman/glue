@@ -91,6 +91,23 @@
     });
   });
 
+  describe("Configuration", function () {
+    it("allows the data attribute prefix to be defined", function () {
+      var opts;
+
+      glue({ prefix: "prefix" });
+
+      sandbox.innerHTML = "<div data-prefix='widget' data-prefix-foo='bar' data-prefix-baz='qux'></div>";
+
+      glue("widget", function (options) {
+        opts = options;
+      });
+
+      expect(opts.foo).to.eql("bar");
+      expect(opts.baz).to.eql("qux");
+    });
+  });
+
   describe("Options", function () {
     it("should provide pass a set of options to the constructor based on markup attributes", function () {
       var opts;

@@ -4,20 +4,33 @@
     // aliases
     document = window.document,
     // constants
-    PREFIX = "data-glue",
-    R_ATTR_PREFIX = new RegExp("^" + PREFIX + "-"),
+    PREFIX,
+    R_ATTR_PREFIX,
     R_BOOL = /^(true|false)$/,
     // state
-    callbacks = {},
-    invokedNodes = [],
+    callbacks,
+    invokedNodes,
+
+  createConstants = function (prefix) {
+    PREFIX = "data-" + prefix;
+    R_ATTR_PREFIX = new RegExp("^" + PREFIX + "-");
+  },
 
   glue = function (name, callback) {
-    if (callback !== undefined) {
-      callbacks[name] = callback;
-    }
+    var opts = name;
 
-    if (callbacks[name] !== undefined) {
-      invokeNodes(findNodes(name), callbacks[name]);
+    if (typeof opts === "object") {
+      if (typeof opts.prefix === "string") {
+        createConstants(opts.prefix);
+      }
+    } else {
+      if (callback !== undefined) {
+        callbacks[name] = callback;
+      }
+
+      if (callbacks[name] !== undefined) {
+        invokeNodes(findNodes(name), callbacks[name]);
+      }
     }
   },
 
@@ -138,9 +151,12 @@
   };
 
   glue.reset = function () {
+    createConstants("glue");
     callbacks = {};
     invokedNodes = [];
   };
+
+  glue.reset();
 
   if (typeof define === "function" && typeof define.amd === "object" && define.amd) {
     define(function () {
