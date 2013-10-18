@@ -89,6 +89,26 @@
 
       expect(results).to.eql(["foo", "bar"]);
     });
+
+    it("can instantiate a module passed by reference", function () {
+      var els = [],
+          container = document.createElement("div");
+
+      container.setAttribute("data-glue", "widget");
+
+      // should not throw
+      glue(container);
+
+      glue("widget", function () {
+        els.push(this);
+      });
+
+      expect(els).to.eql([]);
+
+      glue(container);
+
+      expect(els).to.eql([container]);
+    });
   });
 
   describe("Configuration", function () {
