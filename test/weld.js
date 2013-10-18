@@ -4,6 +4,7 @@
 
   afterEach(function () {
     sandbox.innerHTML = "";
+    weld.reset();
   });
 
   describe("Instantiation", function () {
@@ -43,6 +44,50 @@
       weld("widget");
 
       expect(els).to.eql([container1, container2]);
+    });
+
+    it("doesn't invoke modules until a callback is defined", function () {
+      var els = [],
+          container1 = document.createElement("div"),
+          container2 = document.createElement("div");
+
+      container1.setAttribute("data-weld", "widget");
+      container2.setAttribute("data-weld", "widget");
+
+      sandbox.appendChild(container1);
+
+      weld("widget");
+
+      sandbox.appendChild(container2);
+
+      weld("widget", function () {
+        els.push(this);
+      });
+
+      expect(els).to.eql([container1, container2]);
+    });
+
+    it("should allow a module's callback to be overwritten", function () {
+      var results = [],
+          container1 = document.createElement("div"),
+          container2 = document.createElement("div");
+
+      container1.setAttribute("data-weld", "widget");
+      container2.setAttribute("data-weld", "widget");
+
+      sandbox.appendChild(container1);
+
+      weld("widget", function () {
+        results.push("foo");
+      });
+
+      sandbox.appendChild(container2);
+
+      weld("widget", function () {
+        results.push("bar");
+      });
+
+      expect(results).to.eql(["foo", "bar"]);
     });
   });
 

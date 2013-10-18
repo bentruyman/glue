@@ -15,7 +15,9 @@
       callbacks[name] = callback;
     }
 
-    invokeNodes(findNodes(name), callbacks[name]);
+    if (callbacks[name] !== undefined) {
+      invokeNodes(findNodes(name), callbacks[name]);
+    }
   },
 
   findNodes = (function () {
@@ -132,6 +134,11 @@
 
   toArray = function (arrayLike) {
     return Array.prototype.slice.call(arrayLike);
+  };
+
+  weld.reset = function () {
+    callbacks = {};
+    invokedNodes = [];
   };
 
   window.weld = weld;
