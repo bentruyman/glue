@@ -3,14 +3,14 @@
     // aliases
     document = window.document,
     // constants
-    PREFIX = "data-weld",
+    PREFIX = "data-glue",
     R_ATTR_PREFIX = new RegExp("^" + PREFIX + "-"),
     R_BOOL = /^(true|false)$/,
     // state
     callbacks = {},
     invokedNodes = [],
 
-  weld = function (name, callback) {
+  glue = function (name, callback) {
     if (callback !== undefined) {
       callbacks[name] = callback;
     }
@@ -136,10 +136,10 @@
     return Array.prototype.slice.call(arrayLike);
   };
 
-  weld.reset = function () {
+  glue.reset = function () {
     callbacks = {};
     invokedNodes = [];
   };
 
-  window.weld = weld;
+  window.glue = glue;
 })(this);

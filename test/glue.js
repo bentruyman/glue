@@ -1,10 +1,10 @@
-/* global afterEach, describe, expect, it, weld */
+/* global afterEach, describe, expect, it, glue */
 (function () {
   var sandbox = document.getElementById("sandbox");
 
   afterEach(function () {
     sandbox.innerHTML = "";
-    weld.reset();
+    glue.reset();
   });
 
   describe("Instantiation", function () {
@@ -12,11 +12,11 @@
       var that,
           container = document.createElement("div");
 
-      container.setAttribute("data-weld", "widget");
+      container.setAttribute("data-glue", "widget");
 
       sandbox.appendChild(container);
 
-      weld("widget", function () {
+      glue("widget", function () {
         that = this;
       });
 
@@ -28,12 +28,12 @@
           container1 = document.createElement("div"),
           container2 = document.createElement("div");
 
-      container1.setAttribute("data-weld", "widget");
-      container2.setAttribute("data-weld", "widget");
+      container1.setAttribute("data-glue", "widget");
+      container2.setAttribute("data-glue", "widget");
 
       sandbox.appendChild(container1);
 
-      weld("widget", function () {
+      glue("widget", function () {
         els.push(this);
       });
 
@@ -41,7 +41,7 @@
 
       sandbox.appendChild(container2);
 
-      weld("widget");
+      glue("widget");
 
       expect(els).to.eql([container1, container2]);
     });
@@ -51,16 +51,16 @@
           container1 = document.createElement("div"),
           container2 = document.createElement("div");
 
-      container1.setAttribute("data-weld", "widget");
-      container2.setAttribute("data-weld", "widget");
+      container1.setAttribute("data-glue", "widget");
+      container2.setAttribute("data-glue", "widget");
 
       sandbox.appendChild(container1);
 
-      weld("widget");
+      glue("widget");
 
       sandbox.appendChild(container2);
 
-      weld("widget", function () {
+      glue("widget", function () {
         els.push(this);
       });
 
@@ -72,18 +72,18 @@
           container1 = document.createElement("div"),
           container2 = document.createElement("div");
 
-      container1.setAttribute("data-weld", "widget");
-      container2.setAttribute("data-weld", "widget");
+      container1.setAttribute("data-glue", "widget");
+      container2.setAttribute("data-glue", "widget");
 
       sandbox.appendChild(container1);
 
-      weld("widget", function () {
+      glue("widget", function () {
         results.push("foo");
       });
 
       sandbox.appendChild(container2);
 
-      weld("widget", function () {
+      glue("widget", function () {
         results.push("bar");
       });
 
@@ -95,9 +95,9 @@
     it("should provide pass a set of options to the constructor based on markup attributes", function () {
       var opts;
 
-      sandbox.innerHTML = "<div data-weld='widget' data-weld-foo='bar' data-weld-baz='qux'></div>";
+      sandbox.innerHTML = "<div data-glue='widget' data-glue-foo='bar' data-glue-baz='qux'></div>";
 
-      weld("widget", function (options) {
+      glue("widget", function (options) {
         opts = options;
       });
 
@@ -109,15 +109,15 @@
       var opts;
 
       sandbox.innerHTML = [
-        "<div data-weld='widget'" +
-             "data-weld-opt1='0'" +
-             "data-weld-opt2='10'" +
-             "data-weld-opt3='3.14159'" +
-             "data-weld-opt4='-9000'" +
+        "<div data-glue='widget'" +
+             "data-glue-opt1='0'" +
+             "data-glue-opt2='10'" +
+             "data-glue-opt3='3.14159'" +
+             "data-glue-opt4='-9000'" +
         "</div>"
       ].join(" ");
 
-      weld("widget", function (options) {
+      glue("widget", function (options) {
         opts = options;
       });
 
@@ -131,12 +131,12 @@
       var opts;
 
       sandbox.innerHTML = [
-        "<div data-weld='widget'" +
-             "data-weld-obj1='{ \"foo\": \"bar\" }'" +
+        "<div data-glue='widget'" +
+             "data-glue-obj1='{ \"foo\": \"bar\" }'" +
         "</div>"
       ].join(" ");
 
-      weld("widget", function (options) {
+      glue("widget", function (options) {
         opts = options;
       });
 

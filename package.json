@@ -1,5 +1,5 @@
 {
-  "name": "weld",
+  "name": "glue",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/bentruyman/weld.git"
+    "url": "git://github.com/bentruyman/glue.git"
   },
   "author": "Ben Truyman <ben@truyman.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bentruyman/weld/issues"
+    "url": "https://github.com/bentruyman/glue/issues"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
