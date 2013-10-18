@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Glue - Simple</title>
+  </head>
+  <body>
+    <div data-glue="hello-world" data-glue-text="Hello World"></div>
+    <script src="../glue.js"></script>
+    <script>
+      glue("hello-world", function (options) {
+        this.innerHTML = options.text;
+      });
+    </script>
+  </body>
+</html>
