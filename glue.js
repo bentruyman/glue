@@ -1,3 +1,4 @@
+/* global define */
 (function (window, undefined) {
   var
     // aliases
@@ -141,5 +142,11 @@
     invokedNodes = [];
   };
 
-  window.glue = glue;
+  if (typeof define === "function" && typeof define.amd === "object" && define.amd) {
+    define(function () {
+      return glue;
+    });
+  } else {
+    window.glue = glue;
+  }
 })(this);
