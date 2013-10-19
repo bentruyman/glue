@@ -47,5 +47,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-testem");
 
   grunt.registerTask("default", ["jshint"]);
+  grunt.registerTask("dist", ["uglify", "bytesize"]);
   grunt.registerTask("test", ["jshint", "testem", "clean:testem"]);
 };
