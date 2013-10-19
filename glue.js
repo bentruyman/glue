@@ -4,7 +4,7 @@
  * Copyright 2013 @@author
  * Available under MIT license <https://github.com/bentruyman/glue/blob/master/LICENSE-MIT>
  */
-(function (window, undefined) {
+(function (window) {
   var
     // aliases
     document = window.document,
@@ -29,11 +29,11 @@
         createConstants(opts.prefix);
       }
     } else {
-      if (callback !== undefined) {
+      if (typeof callback !== "undefined") {
         callbacks[name] = callback;
       }
 
-      if (callbacks[name] !== undefined) {
+      if (typeof callbacks[name] !== "undefined") {
         invokeNodes(findNodes(name), callbacks[name]);
       }
     }
@@ -42,7 +42,7 @@
   findNodes = (function () {
     var find;
 
-    if (document.querySelectorAll !== undefined) {
+    if (typeof document.querySelectorAll === "function") {
       find = function (name) {
         return toArray(document.querySelectorAll("[" + PREFIX + "=" + name + "]"));
       };
@@ -50,7 +50,7 @@
       find = function walk(name, root) {
         var child, i, nodes;
 
-        if (root === undefined) {
+        if (typeof root === "undefined") {
           return walk(name, document.body);
         }
 
@@ -100,7 +100,7 @@
     for (;attr = node.attributes[i++];) {
       name = attr.name.split(R_ATTR_PREFIX)[1];
 
-      if (name !== undefined) {
+      if (typeof name !== "undefined") {
         attrs[name] = attr.nodeValue;
       }
     }
