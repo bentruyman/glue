@@ -46,7 +46,7 @@
       expect(els).toEqual([container1, container2]);
     });
 
-    it("doesn't invoke modules until a callback is defined", function () {
+    it("doesn't invoke modules until a factory is defined", function () {
       var els = [],
           container1 = document.createElement("div"),
           container2 = document.createElement("div");
@@ -67,7 +67,7 @@
       expect(els).toEqual([container1, container2]);
     });
 
-    it("should allow a module's callback to be overwritten", function () {
+    it("should allow a module's factory to be overwritten", function () {
       var results = [],
           container1 = document.createElement("div"),
           container2 = document.createElement("div");
@@ -109,7 +109,7 @@
   });
 
   describe("Options", function () {
-    it("should provide pass a set of options to the constructor based on markup attributes", function () {
+    it("should provide pass a set of options to the module's factory based on markup attributes", function () {
       var opts;
 
       sandbox.innerHTML = "<div data-glue='widget' data-glue-foo='bar' data-glue-baz='qux'></div>";

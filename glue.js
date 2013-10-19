@@ -13,7 +13,7 @@
     R_ATTR_PREFIX,
     R_BOOL = /^(true|false)$/,
     // state
-    callbacks,
+    factories,
     invokedNodes,
 
   createConstants = function (prefix) {
@@ -21,7 +21,7 @@
     R_ATTR_PREFIX = new RegExp("^" + PREFIX + "-");
   },
 
-  glue = function (name, callback) {
+  glue = function (name, factory) {
     var opts = name;
 
     if (typeof opts === "object") {
@@ -29,12 +29,12 @@
         createConstants(opts.prefix);
       }
     } else {
-      if (typeof callback !== "undefined") {
-        callbacks[name] = callback;
+      if (typeof factory !== "undefined") {
+        factories[name] = factory;
       }
 
-      if (typeof callbacks[name] !== "undefined") {
-        invokeNodes(findNodes(name), callbacks[name]);
+      if (typeof factories[name] !== "undefined") {
+        invokeNodes(findNodes(name), factories[name]);
       }
     }
   },
@@ -79,7 +79,7 @@
           uninvokedNodes = [];
 
       outer: for (;node = nodes[i++];) {
-        inner: for (k = 0;invokedNode = invokedNodes[k++];) {
+        inner: for (k = 0; invokedNode = invokedNodes[k++];) {
           if (invokedNode === node) {
             continue outer;
           }
@@ -108,16 +108,16 @@
     return attrs;
   },
 
-  invokeNodes = function (nodes, callback) {
+  invokeNodes = function (nodes, factory) {
     var node,
         i = 0;
 
     for (;node = nodes[i++];) {
-      invokeNode(node, callback);
+      invokeNode(node, factory);
     }
   },
 
-  invokeNode = function (node, callback) {
+  invokeNode = function (node, factory) {
     var attrs = findAttributes(node),
         settings = {},
         key;
@@ -128,7 +128,7 @@
       }
     }
 
-    callback.call(node, settings);
+    factory.call(node, settings);
     invokedNodes.push(node);
   },
 
@@ -157,7 +157,7 @@
 
   glue.reset = function () {
     createConstants("glue");
-    callbacks = {};
+    factories = {};
     invokedNodes = [];
   };
 
