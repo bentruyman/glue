@@ -9,11 +9,9 @@
     <div id="sandbox" style="position:absolute;top:-5000px;left:-5000px"></div>
     <script src="/support/jasmine.js"></script>
     <script src="/support/jasmine-html.js"></script>
-    <script>mocha.setup("bdd");</script>
     <script src="/glue.js"></script>
     <script src="/test/glue.js"></script>
-    <script src="/testem.js"></script>
-    <script>
+    <script><script src="/testem.js"></script><script>
       (function() {
         var jasmineEnv = jasmine.getEnv(),
             htmlReporter = new jasmine.HtmlReporter();
