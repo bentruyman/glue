@@ -5,7 +5,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
     bytesize: {
-      src: ["glue.js"]
+      src: ["glue.js", "dist/glue.min.js"]
     },
     clean: {
       dist: "dist",
