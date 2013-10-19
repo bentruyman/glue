@@ -89,26 +89,6 @@
 
       expect(results).toEqual(["foo", "bar"]);
     });
-
-    it("can instantiate a module passed by reference", function () {
-      var els = [],
-          container = document.createElement("div");
-
-      container.setAttribute("data-glue", "widget");
-
-      // should not throw
-      glue(container);
-
-      glue("widget", function () {
-        els.push(this);
-      });
-
-      expect(els).toEqual([]);
-
-      glue(container);
-
-      expect(els).toEqual([container]);
-    });
   });
 
   describe("Configuration", function () {

@@ -19,13 +19,7 @@
   glue = function (name, callback) {
     var opts = name;
 
-    if (opts instanceof HTMLElement) {
-      name = opts.getAttribute(PREFIX);
-
-      if (callbacks[name] !== undefined) {
-        invokeNode(opts, callbacks[name]);
-      }
-    } else if (typeof opts === "object") {
+    if (typeof opts === "object") {
       if (typeof opts.prefix === "string") {
         createConstants(opts.prefix);
       }
