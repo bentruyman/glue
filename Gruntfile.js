@@ -7,7 +7,6 @@ module.exports = function (grunt) {
       src: ["dist/glue.js", "dist/glue.min.js"]
     },
     clean: {
-      dist: "dist",
       testem: ["./json", "./testem.*.json"]
     },
     copy: {
