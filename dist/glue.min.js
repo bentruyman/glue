@@ -1,6 +1,6 @@
 /**
  * @license
- * Glue 0.0.1 <https://github.com/bentruyman/glue>
+ * Glue 1.0.0-alpha <https://github.com/bentruyman/glue>
  * Copyright 2013 Ben Truyman <ben@truyman.com>
  * Available under MIT license <https://github.com/bentruyman/glue/blob/master/LICENSE-MIT>
  */

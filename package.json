@@ -1,6 +1,6 @@
 {
   "name": "glue",
-  "version": "0.0.1",
+  "version": "1.0.0-alpha",
   "description": "Cleanly bonds together your content with behaviors.",
   "author": "Ben Truyman <ben@truyman.com>",
   "keywords": [
