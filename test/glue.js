@@ -67,7 +67,7 @@
       expect(els).toEqual([container1, container2]);
     });
 
-    it("should allow a module's callback toBe overwritten", function () {
+    it("should allow a module's callback to be overwritten", function () {
       var results = [],
           container1 = document.createElement("div"),
           container2 = document.createElement("div");
@@ -92,7 +92,7 @@
   });
 
   describe("Configuration", function () {
-    it("allows the data attribute prefix toBe defined", function () {
+    it("allows the data attribute prefix to be defined", function () {
       var opts;
 
       glue({ prefix: "prefix" });
