@@ -14,11 +14,14 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
-    "*.md",
     "Gruntfile.js",
-    "bower.json",
+    "LICENSE-MIT",
+    "README.md",
+    "examples",
     "node_modules",
     "package.json",
-    "test"
+    "support",
+    "test",
+    "testem.json"
   ]
 }
