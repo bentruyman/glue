@@ -1,10 +1,10 @@
 /**
  * @license
- * Glue 1.0.0-alpha <https://github.com/bentruyman/glue>
+ * Glue 1.0.0-beta <https://github.com/bentruyman/glue>
  * Copyright 2013 Ben Truyman <ben@truyman.com>
  * Available under MIT license <https://github.com/bentruyman/glue/blob/master/LICENSE-MIT>
  */
-(function (window, undefined) {
+(function (window) {
   var
     // aliases
     document = window.document,
@@ -13,7 +13,7 @@
     R_ATTR_PREFIX,
     R_BOOL = /^(true|false)$/,
     // state
-    callbacks,
+    factories,
     invokedNodes,
 
   createConstants = function (prefix) {
@@ -21,7 +21,7 @@
     R_ATTR_PREFIX = new RegExp("^" + PREFIX + "-");
   },
 
-  glue = function (name, callback) {
+  glue = function (name, factory) {
     var opts = name;
 
     if (typeof opts === "object") {
@@ -29,12 +29,12 @@
         createConstants(opts.prefix);
       }
     } else {
-      if (callback !== undefined) {
-        callbacks[name] = callback;
+      if (typeof factory !== "undefined") {
+        factories[name] = factory;
       }
 
-      if (callbacks[name] !== undefined) {
-        invokeNodes(findNodes(name), callbacks[name]);
+      if (typeof factories[name] !== "undefined") {
+        invokeNodes(findNodes(name), factories[name]);
       }
     }
   },
@@ -42,7 +42,7 @@
   findNodes = (function () {
     var find;
 
-    if (document.querySelectorAll !== undefined) {
+    if (typeof document.querySelectorAll === "function") {
       find = function (name) {
         return toArray(document.querySelectorAll("[" + PREFIX + "=" + name + "]"));
       };
@@ -50,7 +50,7 @@
       find = function walk(name, root) {
         var child, i, nodes;
 
-        if (root === undefined) {
+        if (typeof root === "undefined") {
           return walk(name, document.body);
         }
 
@@ -79,7 +79,7 @@
           uninvokedNodes = [];
 
       outer: for (;node = nodes[i++];) {
-        inner: for (k = 0;invokedNode = invokedNodes[k++];) {
+        inner: for (k = 0; invokedNode = invokedNodes[k++];) {
           if (invokedNode === node) {
             continue outer;
           }
@@ -100,7 +100,7 @@
     for (;attr = node.attributes[i++];) {
       name = attr.name.split(R_ATTR_PREFIX)[1];
 
-      if (name !== undefined) {
+      if (typeof name !== "undefined") {
         attrs[name] = attr.nodeValue;
       }
     }
@@ -108,16 +108,16 @@
     return attrs;
   },
 
-  invokeNodes = function (nodes, callback) {
+  invokeNodes = function (nodes, factory) {
     var node,
         i = 0;
 
     for (;node = nodes[i++];) {
-      invokeNode(node, callback);
+      invokeNode(node, factory);
     }
   },
 
-  invokeNode = function (node, callback) {
+  invokeNode = function (node, factory) {
     var attrs = findAttributes(node),
         settings = {},
         key;
@@ -128,7 +128,7 @@
       }
     }
 
-    callback.call(node, settings);
+    factory.call(node, settings);
     invokedNodes.push(node);
   },
 
@@ -157,7 +157,7 @@
 
   glue.reset = function () {
     createConstants("glue");
-    callbacks = {};
+    factories = {};
     invokedNodes = [];
   };
 

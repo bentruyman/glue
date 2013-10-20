@@ -1,6 +1,6 @@
 {
   "name": "glue",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-beta",
   "homepage": "https://github.com/bentruyman/glue",
   "description": "Cleanly bonds together your content with behaviors.",
   "keywords": [
