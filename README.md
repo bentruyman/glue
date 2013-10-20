@@ -4,7 +4,7 @@ Cleanly bonds together your content with behaviors.
 
 ## Usage
 
-Glue crawls the DOM looking for elements with an attribute of `data-glue`, using it as the name of the module. From there, modules can be invoked with a constructor to add behaviors to that instance.
+Glue crawls the DOM looking for elements with an attribute of `data-glue`, using it as the name of the module. From there, modules can be invoked with a factory method to add behaviors to that instance.
 
 In it's most basic form:
 
@@ -17,7 +17,7 @@ In it's most basic form:
 </script>
 ```
 
-However, it might be useful to pass in instance-specific options as additional data attributes. To do so, simply create additional data attributes prefixed with `data-glue-` and they will be passed in with the `options` object provided to the constructor.
+However, it might be useful to pass in instance-specific options as additional data attributes. To do so, simply create additional data attributes prefixed with `data-glue-` and they will be passed in with the `options` object provided to the factory.
 
 ```html
 <div data-glue="hello-world" data-glue-text="Hello World"></div>
@@ -44,7 +44,7 @@ Provided options will also try to be coerced into either `Object` or `Number` fo
 
 ### Instantiating New Modules
 
-New modules can be instantiated with previously specified constructors simply by invoking `glue` with the name of the module.
+New modules can be instantiated with previously specified factories simply by invoking `glue` with the name of the module.
 
 ```html
 <div data-glue="hello-world"></div>
