@@ -2,9 +2,8 @@
   "boss": true,
   "browser": true,
   "curly": true,
-  "eqeqeq": true,
-  "eqnull": true,
   "expr": true,
+  "globals": { "define": true },
   "immed": true,
   "noarg": true,
   "node": true,
@@ -13,8 +12,5 @@
   "smarttabs": true,
   "trailing": true,
   "undef": true,
-  "unused": true,
-  "globals": {
-    "define": true
-  }
+  "unused": true
 }

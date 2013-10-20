@@ -24,16 +24,16 @@
   glue = function (name, factory) {
     var opts = name;
 
-    if (typeof opts === "object") {
-      if (typeof opts.prefix === "string") {
+    if (typeof opts == "object") {
+      if (typeof opts.prefix == "string") {
         createConstants(opts.prefix);
       }
     } else {
-      if (typeof factory !== "undefined") {
+      if (typeof factory != "undefined") {
         factories[name] = factory;
       }
 
-      if (typeof factories[name] !== "undefined") {
+      if (typeof factories[name] != "undefined") {
         invokeNodes(findNodes(name), factories[name]);
       }
     }
@@ -42,7 +42,7 @@
   findNodes = (function () {
     var find;
 
-    if (typeof document.querySelectorAll === "function") {
+    if (typeof document.querySelectorAll == "function") {
       find = function (name) {
         return toArray(document.querySelectorAll("[" + PREFIX + "=" + name + "]"));
       };
@@ -50,7 +50,7 @@
       find = function walk(name, root) {
         var child, i, nodes;
 
-        if (typeof root === "undefined") {
+        if (typeof root == "undefined") {
           return walk(name, document.body);
         }
 
@@ -73,7 +73,7 @@
     }
 
     return function (name) {
-      var k, invokedNode, node,
+      var invokedNode, k, node,
           i = 0,
           nodes = find(name),
           uninvokedNodes = [];
@@ -100,7 +100,7 @@
     for (;attr = node.attributes[i++];) {
       name = attr.name.split(R_ATTR_PREFIX)[1];
 
-      if (typeof name !== "undefined") {
+      if (typeof name != "undefined") {
         attrs[name] = attr.nodeValue;
       }
     }
@@ -137,9 +137,10 @@
     if(/^\-?([0-9]+(\.[0-9]+)?|Infinity)$/.test(value)) {
       return Number(value);
     }
+
     // boolean
     else if (value.match(R_BOOL)) {
-      return (value === "true") ? true : false;
+      return (value == "true") ? true : false;
     }
 
     // json
@@ -163,7 +164,7 @@
 
   glue.reset();
 
-  if (typeof define === "function" && typeof define.amd === "object" && define.amd) {
+  if (typeof define == "function" && typeof define.amd == "object" && define.amd) {
     define(function () {
       return glue;
     });
